@@ -1,6 +1,6 @@
 {
   "name": "anmjs",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "main": "./lib/index.js",
   "license": "MIT",
   "author": "fuchuan",
@@ -10,8 +10,7 @@
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development PORT=3000 node -r babel-register-ts ./config/devServer.ts",
-    "build": "concurrently \"tsc\" \"cross-env NODE_ENV=production node -r babel-register-ts ./config/build.ts\"",
-    "publish": "npm run build && npm publish"
+    "build": "concurrently \"tsc\" \"cross-env NODE_ENV=production node -r babel-register-ts ./config/build.ts\""
   },
   "dependencies": {
   },
