@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-react",
+    "tslint-config-prettier"
+  ],
+  "linterOptions": {
+    "exclude": [
+      "config/**/*.ts",
+      "node_modules/**/*.ts",
+      "packages/**/*.ts",
+      "examples/**/*.ts",
+      "examples/**/*.tsx"
+    ]
+  }
+}

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>example</title>
+  <!-- <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> -->
+  <script src="../lib/index.js"></script>
+  <script>
+    window.React = anm;
+    for (let key in anm) {
+      window[key] = anm[key];
+    }
+  </script>
+
+  <!-- Don't use this in production: -->
+  <!-- <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script> -->
+</head>
+
+<body>
+  <div id="root"></div>
+  <script>
+    var createElement_1 = anm;
+    var render_1 = anm;
+    var hooks_1 = anm;
+    var React = {
+      createElement: createElement_1.createElement
+    };
+    var idCounter = 0;
+
+    function TodoApp() {
+      var _a = hooks_1.useState([]),
+        todos = _a[0],
+        setTodos = _a[1];
+      return React.createElement(
+        "div",
+        null,
+        React.createElement(TodoEditor, {
+          onAdd: function (thing) {
+            setTodos(todos.concat([{
+              id: idCounter++,
+              thing: thing,
+              completed: false,
+              createAt: new Date()
+            }]));
+          }
+        }),
+        React.createElement(TodoList, {
+          todos: todos,
+          onCompleted: function (id) {
+            var i = todos.findIndex(function (x) {
+              return x.id === id;
+            });
+            if (i !== -1) {
+              todos[i].completed = true;
+              setTodos(todos.slice());
+            }
+          }
+        })
+      );
+    }
+
+    function TodoEditor(_a) {
+      var onAdd = _a.onAdd;
+      var _b = hooks_1.useState(''),
+        thing = _b[0],
+        setThing = _b[1];
+      return React.createElement(
+        "div",
+        null,
+        React.createElement("input", {
+          value: thing,
+          onInput: function (e) {
+            return setThing(e.target.value);
+          }
+        }),
+        React.createElement(
+          "button", {
+            disabled: thing.trim() === '',
+            onClick: function () {
+              return setThing(''), onAdd(thing);
+            }
+          },
+          "add"
+        ),
+        React.createElement(
+          "button", {
+            onClick: function () {
+              for (var i = 0; i < 100; i++) {
+                onAdd(i.toString());
+              }
+            }
+          },
+          "test"
+        )
+      );
+    }
+
+    function TodoList(_a) {
+      var todos = _a.todos,
+        onCompleted = _a.onCompleted;
+      var _b = hooks_1.useState('all'),
+        filter = _b[0],
+        setFilter = _b[1];
+      todos = todos.filter(function (todo) {
+        if (filter === 'all') return true;
+        if (filter === 'completed') return todo.completed;
+        return !todo.completed;
+      });
+      return React.createElement(
+        "div",
+        null,
+        React.createElement(
+          "div",
+          null,
+          React.createElement(
+            "button", {
+              disabled: filter === 'all',
+              onClick: function () {
+                return setFilter('all');
+              }
+            },
+            "all"
+          ),
+          React.createElement(
+            "button", {
+              disabled: filter === 'completed',
+              onClick: function () {
+                return setFilter('completed');
+              }
+            },
+            "completed"
+          ),
+          React.createElement(
+            "button", {
+              disabled: filter === 'uncompleted',
+              onClick: function () {
+                return setFilter('uncompleted');
+              }
+            },
+            "uncompleted"
+          )
+        ),
+        React.createElement(
+          "div",
+          null,
+          todos.map(function (todo) {
+            return React.createElement(TodoItem
+              // key={todo.id.toString()}
+              , {
+                todo: todo,
+                onCompleted: onCompleted
+              });
+          })
+        )
+      );
+    }
+
+    function TodoItem(_a) {
+      var todo = _a.todo,
+        onCompleted = _a.onCompleted;
+      hooks_1.useEffect(function () {
+        console.log('mounted');
+        return function () {
+          console.log('unmounted');
+        };
+      });
+      return React.createElement(
+        "div", {
+          style: {
+            backgroundColor: todo.completed ? 'green' : 'red',
+            color: 'white',
+            padding: '1em',
+            margin: '1em 0',
+            display: 'flex',
+            justifyContent: 'space-around'
+          }
+        },
+        React.createElement(
+          "span",
+          null,
+          todo.thing
+        ),
+        React.createElement(
+          "span",
+          null,
+          todo.createAt.toLocaleString()
+        ),
+        todo.completed ? React.createElement(
+          "span",
+          null,
+          "completed"
+        ) : React.createElement(
+          "button", {
+            onClick: function () {
+              return onCompleted(todo.id);
+            }
+          },
+          "complete"
+        )
+      );
+    }
+    render_1.render(
+      // <div style={{ backgroundColor: '#aaa' }}>
+      // 	<Counter />
+      // </div>
+      React.createElement(TodoApp, null), document.getElementById('root'));
+  </script>
+</body>
+
+</html>
