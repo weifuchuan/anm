@@ -11,7 +11,7 @@ import { isNullOrUndef } from './kit';
 
 export function createElement(
 	type: VNodeType,
-	props: IProps,
+	props: IProps = {},
 	...children: VNode[]
 ): VNode {
 	if (!props) props = {};
